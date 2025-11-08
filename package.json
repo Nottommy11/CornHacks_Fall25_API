@@ -1,0 +1,23 @@
+{
+  "name": "cornhacks_fall25_api",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Nottommy11/CornHacks_Fall25_API#readme",
+  "bugs": {
+    "url": "https://github.com/Nottommy11/CornHacks_Fall25_API/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nottommy11/CornHacks_Fall25_API.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
