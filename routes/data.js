@@ -3,10 +3,37 @@ const router = express.Router();
 const queryHasura = require("../src/utils/hasuraClient.js");
 
 router.post("/", async (req, res) => {
-    const { metricId, value } = req.body;
+    const { metric, value } = req.body;
 
-    if (!metricId || value === undefined) {
+    if (!metric || value === undefined) {
         return res.status(400).json({ error: "Missing metricId or value" });
+    }
+
+    let metricId;
+    switch (metric) {
+        case "water_temp":
+            metricId = 1;
+            break;
+        case "air_temp":
+            metricId = 3;
+            break;
+        case "humidity":
+            metricId = 2;
+            break;
+        case "pressure":
+            metricId = 4;
+            break;
+        case "tds":
+            metricId = 5;
+            break;
+        case "water_level":
+            metricId = 6;
+            break;
+        default:
+            console.warn(`[API] Unknown metric: ${metric}`);
+            return res
+                .status(400)
+                .json({ error: `Unknown metric type: ${metric}` });
     }
 
     const mutation = `
