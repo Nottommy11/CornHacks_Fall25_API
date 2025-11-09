@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const queryHasura = require("../src/utils/hasuraClient.js");
 
+nodeId = "fc0291ae-d169-420c-9f2d-f0ec884db57b";
+
 router.post("/", async (req, res) => {
     const { metricType, value } = req.body;
 
@@ -37,11 +39,12 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-            mutation InsertNodeData($metricId: bigint!, $value: numeric!, nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}, $metricType: text!) {
+            mutation InsertNodeData($metricId: bigint!, $value: numeric!, nodeId: uuid!, $metricType: text!) {
         insert_NodeData_one(object: {
             metricId: $metricId,
             value: $value,
-            metricType: $metricType
+            nodeId: $nodeId,
+            metricType: $metricType,
         }) {
             id
             metricId
