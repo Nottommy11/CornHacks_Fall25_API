@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
             }
         `;
         const result = await queryHasura(query);
-        res.json(result.Nodes);
+        res.json(result.NodeData);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch nodes" });
     }
