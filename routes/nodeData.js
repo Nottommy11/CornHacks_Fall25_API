@@ -1,20 +1,20 @@
 const express = require("express");
-const  queryHasura  = require("../src/utils/hasuraClient.js");
+const queryHasura = require("../src/utils/hasuraClient.js");
 
 const router = express.Router();
 
-// Get all nodes
 router.get("/", async (req, res) => {
     try {
         const query = `
-            query {
-                Nodes {
+            query MyQuery5 {
+            NodeData(where: {nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}}) {
                 id
-                name
-                location
-                is_online
-                last_ping
-                }
+                metricId
+                nodeId
+                timeStamp
+                value
+                metricType
+            }
             }
             `;
         const result = await queryHasura(query);

@@ -3,16 +3,16 @@ const router = express.Router();
 const queryHasura = require("../src/utils/hasuraClient.js");
 
 router.post("/", async (req, res) => {
-    const { metric, value } = req.body;
+    const { metricType, value } = req.body;
 
-    if (!metric || value === undefined) {
+    if (!metricType || value === undefined) {
         return res.status(400).json({ error: "Missing metricId or value" });
     }
 
     nodeId = "fc0291ae-d169-420c-9f2d-f0ec884db57b";
 
     let metricId;
-    switch (metric) {
+    switch (metricType) {
         case "water_temp":
             metricId = 3;
             break;
@@ -32,23 +32,25 @@ router.post("/", async (req, res) => {
             metricId = 10;
             break;
         default:
-            console.warn(`[API] Unknown metric: ${metric}`);
+            console.warn(`[API] Unknown metric: ${metricType}`);
             return res
                 .status(400)
-                .json({ error: `Unknown metric type: ${metric}` });
+                .json({ error: `Unknown metric type: ${metricType}` });
     }
 
     const mutation = `
-            mutation InsertNodeData($metricId: bigint!, $value: numeric!, $nodeId: uuid!) {
+            mutation InsertNodeData($metricId: bigint!, $value: numeric!, $nodeId: uuid!, $metricType) {
         insert_NodeData_one(object: {
             metricId: $metricId,
             value: $value,
             nodeId: $nodeId,
+            metricType: $metricType
         }) {
             id
             metricId
             value
             timeStamp
+            metricType
         }
         }
     `;
@@ -57,8 +59,9 @@ router.post("/", async (req, res) => {
         const result = await queryHasura(mutation, {
             metricId,
             value,
+            metricType,
         });
-        console.log(`[Hasura] Inserted ${metricId}:${value}`);
+        console.log(`[Hasura] Inserted ${metricType}:${value}`);
         res.json({ success: true, inserted: result.insert_NodeData_one });
     } catch (err) {
         console.error("[Hasura Error]", err.message);
