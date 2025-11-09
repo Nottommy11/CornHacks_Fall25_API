@@ -12,22 +12,23 @@ router.post("/", async (req, res) => {
     let metricId;
     switch (metric) {
         case "water_temp":
-            metricId = 1;
-            break;
-        case "air_temp":
             metricId = 3;
             break;
+        case "air_temp":
+            metricId = 7;
+            break;
         case "humidity":
-            metricId = 2;
+            metricId = 6;
             break;
         case "pressure":
-            metricId = 4;
+            metricId = 8;
             break;
         case "tds":
-            metricId = 5;
+            metricId = 9;
             break;
         case "water_level":
-            metricId = 6;
+            metricId = 10;
+            value = 4.5;
             break;
         default:
             console.warn(`[API] Unknown metric: ${metric}`);
