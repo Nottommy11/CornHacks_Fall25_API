@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-            mutation InsertNodeData($value: Float!) {
+            mutation InsertNodeData($value: numeric!) {
         insert_NodeData_one(object: {
             metricId: 2,
             value: $value
