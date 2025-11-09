@@ -59,6 +59,7 @@ router.post("/", async (req, res) => {
         const result = await queryHasura(mutation, {
             metricId,
             value,
+            nodeId,
             metricType,
         });
         console.log(`[Hasura] Inserted ${metricType}:${value}`);
