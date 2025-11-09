@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const queryHasura  = require("../src/utils/hasuraClient.js");
+const queryHasura = require("../src/utils/hasuraClient.js");
 
 router.post("/", async (req, res) => {
     const { metricType, value } = req.body;
@@ -10,15 +10,17 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-        mutation insertNodeData($metricType: String!,  $value: Float!){
-        insert_node_data_one(object: {
-                metric_type: $metricType,
-                value: $value
-            })
-            id
-            metricId
-            timeStamp
-            value
+        mutation ($metricType: String!,  $value: Float!){
+            insert_node_data_one(object: {
+                    metric_type: $metricType,
+                    value: $value
+                }) {
+                returning {
+                    id
+                    metricId
+                    timeStamp
+                    value
+                }
             }
         }
     `;
