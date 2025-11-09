@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
                 metricType
             }
             }
-            `;
+        `;
         const result = await queryHasura(query);
         res.json(result.Nodes);
     } catch (error) {

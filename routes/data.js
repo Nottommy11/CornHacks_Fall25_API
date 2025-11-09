@@ -9,8 +9,6 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ error: "Missing metricId or value" });
     }
 
-    nodeId = "fc0291ae-d169-420c-9f2d-f0ec884db57b";
-
     let metricId;
     switch (metricType) {
         case "water_temp":
@@ -39,7 +37,7 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-            mutation InsertNodeData($metricId: bigint!, $value: numeric!, nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}, $metricType) {
+            mutation InsertNodeData($metricId: bigint!, $value: numeric!, nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}, $metricType: text!) {
         insert_NodeData_one(object: {
             metricId: $metricId,
             value: $value,
