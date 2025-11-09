@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/nodes", nodesRouter);
-app.use("/api/nodes/data", dataRouter);
+app.use("/api/data", dataRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`API running on port ${PORT}`));
