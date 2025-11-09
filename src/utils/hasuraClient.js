@@ -1,11 +1,10 @@
-import fetch from "node-fetch";
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 
 const HASURA_URL = process.env.HASURA_URL;
 const HASURA_ADMIN_SECRET = process.env.HASURA_ADMIN_SECRET;
 
-export async function queryHasura(query, variables = {}) {
+module.exports = async function queryHasura(query, variables = {}) {
     const res = await fetch(HASURA_URL, {
         method: "POST",
         headers: {

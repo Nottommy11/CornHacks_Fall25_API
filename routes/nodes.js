@@ -1,5 +1,5 @@
-import express from "express";
-import { queryHasura } from "../utils/hasuraClient.js";
+const express = require("express");
+const  queryHasura  = require("../src/utils/hasuraClient.js");
 
 const router = express.Router();
 
@@ -8,19 +8,20 @@ router.get("/", async (req, res) => {
     try {
         const query = `
             query {
-                nodes {
+                Nodes {
                 id
                 name
+                location
                 is_online
                 last_ping
                 }
             }
             `;
         const result = await queryHasura(query);
-        res.json(result.nodes);
+        res.json(result.Nodes);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch nodes" });
     }
 });
 
-export default router;
+module.exports = router;
