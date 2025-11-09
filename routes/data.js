@@ -10,18 +10,16 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-        mutation ($metricType: String!,  $value: Float!){
-            insert_node_data_one(object: {
-                    metric_type: $metricType,
-                    value: $value
-                }) {
-                returning {
-                    id
-                    metricId
-                    timeStamp
-                    value
-                }
-            }
+            mutation InsertNodeData($metricType: String!, $value: Float!) {
+        insert_NodeData_one(object: {
+            metricType: $metricType,
+            value: $value
+        }) {
+            id
+            metricType
+            value
+            timeStamp
+        }
         }
     `;
 
