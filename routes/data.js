@@ -39,11 +39,10 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-            mutation InsertNodeData($metricId: bigint!, $value: numeric!, $nodeId: uuid!, $metricType) {
+            mutation InsertNodeData($metricId: bigint!, $value: numeric!, nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}, $metricType) {
         insert_NodeData_one(object: {
             metricId: $metricId,
             value: $value,
-            nodeId: $nodeId,
             metricType: $metricType
         }) {
             id
