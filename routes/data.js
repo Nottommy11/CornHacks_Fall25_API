@@ -10,13 +10,13 @@ router.post("/", async (req, res) => {
     }
 
     const mutation = `
-            mutation InsertNodeData($metricType: String!, $value: Float!) {
+            mutation InsertNodeData($metricId: String!, $value: Float!) {
         insert_NodeData_one(object: {
-            metricType: $metricType,
+            metricId: $metricType,
             value: $value
         }) {
             id
-            metricType
+            metricId
             value
             timeStamp
         }
@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
             metricType,
             value,
         });
-        console.log(`[Hasura] Inserted ${metricType}:${value}`);
+        console.log(`[Hasura] Inserted ${2}:${value}`);
         res.json({ success: true, inserted: result.insert_node_data_one });
     } catch (err) {
         console.error("[Hasura Error]", err.message);
