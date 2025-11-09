@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { queryHasura } = require("../src/utils/hasuraClient.js");
+const queryHasura  = require("../src/utils/hasuraClient.js");
 
 router.post("/", async (req, res) => {
     const { metricType, value } = req.body;
