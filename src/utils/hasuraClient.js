@@ -4,7 +4,7 @@ dotenv.config();
 const HASURA_URL = process.env.HASURA_URL;
 const HASURA_ADMIN_SECRET = process.env.HASURA_ADMIN_SECRET;
 
-module.exports = async function queryHasura(query, variables = {}) {
+async function queryHasura(query, variables = {}) {
     const res = await fetch(HASURA_URL, {
         method: "POST",
         headers: {
@@ -20,3 +20,5 @@ module.exports = async function queryHasura(query, variables = {}) {
     }
     return data.data;
 }
+
+module.exports = queryHasura;
