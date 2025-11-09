@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
             break;
         case "water_level":
             metricId = 10;
-            value = 4.5;
             break;
         default:
             console.warn(`[API] Unknown metric: ${metric}`);
