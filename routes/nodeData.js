@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         const query = `
             query MyQuery5 {
-            NodeData(where: {nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}}, limit: 100) {
+            NodeData(where: {nodeId: {_eq: "fc0291ae-d169-420c-9f2d-f0ec884db57b"}}, limit: 100, order_by: {timeStamp: desc}) {
                 id
                 metricId
                 nodeId
